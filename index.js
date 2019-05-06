@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {hallsHandler} = require('./route-handlers');
+const {hallHandler} = require('./route-handlers');
+
 const router = new express.Router();
 const app = express();
 const port = 3000;
@@ -15,7 +17,7 @@ app.use(
 
 // TODO: Base routes
 router.use('/halls', hallsHandler);
-
+router.use('/hall', hallHandler);
 
 // Test route
 router.get('/', (req, res) => {
