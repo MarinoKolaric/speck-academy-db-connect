@@ -15,9 +15,11 @@ app.use(
   })
 )
 
+//console.log(hallsHandler);
 // TODO: Base routes
 router.use('/halls', hallsHandler);
-router.use('/hall', hallHandler);
+
+
 
 // Test route
 router.get('/', (req, res) => {
