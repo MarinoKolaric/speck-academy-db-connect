@@ -4,8 +4,14 @@ const router = new express.Router();
 
 router.route('/').get(hallsController.getHalls);
 
-router.route('/:hallId').get(hallsController.getHallById);
+router.route('/').post(hallsController.createHall);
+
+router.route('/:hall_id').put(hallsController.updateHall);
+
+router.route('/:hall_id').get(hallsController.getHallById);
 
 
 
-module.export = router;
+
+
+module.exports = router;
