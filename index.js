@@ -1,9 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {hallsHandler} = require('./route-handlers');
+const {usersHandler} = require('./route-handlers');
+const {reservationsHandler} = require('./route-handlers');
 
 const router = new express.Router();
 const app = express();
 const port = 3000;
+
 
 app.use(bodyParser.json())
 app.use(
@@ -13,6 +17,11 @@ app.use(
 )
 
 // TODO: Base routes
+router.use('/halls', hallsHandler);
+router.use('/users', usersHandler);
+router.use('/reservations', reservationsHandler);
+
+
 
 // Test route
 router.get('/', (req, res) => {
