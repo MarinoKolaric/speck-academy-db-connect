@@ -1,9 +1,8 @@
 const hallsHandler = require('./halls');
 
-const usersHandlerr = require('./users');
+const usersHandler = require('./users');
 
 module.exports = {
     hallsHandler, 
-
-    //usersHandler,
+    usersHandler
 };
