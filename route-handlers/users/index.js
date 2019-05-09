@@ -1,21 +1,21 @@
 const express = require('express');
-const hallsControler = require('./controller.js');
+const usersControler = require('./controller.js');
 const router = new express.Router();
 
 
 router.route('/getall')
-    .get(hallsControler.getHalls);
+    .get(usersControler.getUsers);
 
 router.route('/get/:input')
-    .get(hallsControler.getHall);
+    .get(usersControler.getUser);
 
 router.route('/postuser')
-    .post(hallsControler.postHall);
+    .post(usersControler.postUser);
 
 router.route('/updateuser/:input')
-    .post(hallsControler.updateHall);    
+    .post(usersControler.updateUser);    
 
 router.route('/deleteuser/:input')
-    .delete(hallsControler.deleteHall);    
+    .delete(usersControler.deleteUser);    
 
 module.exports = router;

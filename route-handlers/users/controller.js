@@ -13,7 +13,7 @@ const getUsers = (req, res, next) => {
 const getUser = (req, res, next) => {
     console.log("getUser");
     const userId = req.params;
-    db.query("SELECT * FROM halls WHERE user_id = $1;", [userId.input], (err, result) => {
+    db.query("SELECT * FROM users WHERE user_id = $1;", [userId.input], (err, result) => {
             if (err) {
             return next(err);
         }
@@ -21,10 +21,10 @@ const getUser = (req, res, next) => {
     });
 }
 
-const postHall = (req, res, next) => {
-    console.log("postHall");
+const postUser = (req, res, next) => {
+    console.log("postUser");
     const bodyData = req.body;
-    db.query("INSERT INTO halls (hall_id, name, address, capacity) VALUES ($1, $2, $3, $4);", [bodyData.hall_id, bodyData.name, bodyData.address, bodyData.capacity], (err, result) => {
+    db.query("INSERT INTO users (user_id, username, email) VALUES ($1, $2, $3);", [bodyData.user_id, bodyData.username, bodyData.email,], (err, result) => {
             if (err) {
             return next(err);
         }
@@ -32,11 +32,11 @@ const postHall = (req, res, next) => {
     });
 }
 
-const updateHall = (req, res, next) => {
-    console.log("updateHall");
-    const hallId = req.params;
+const updateUser = (req, res, next) => {
+    console.log("updateUser");
+    const userId = req.params;
     const bodyData = req.body;
-    db.query("UPDATE halls SET name = $1, address = $2, capacity = $3 WHERE hall_id = $4;", [bodyData.name, bodyData.address, bodyData.capacity, hallId.input], (err, result) => {
+    db.query("UPDATE users SET username = $1, email = $2  WHERE user_id = $3;", [bodyData.username, bodyData.email, userId.input], (err, result) => {
             if (err) {
             return next(err);
         }
@@ -44,10 +44,10 @@ const updateHall = (req, res, next) => {
     });
 }
 
-const deleteHall = (req, res, next) => {
-    console.log("deleteHall");
-    const hallId = req.params;
-    db.query("DELETE FROM halls WHERE hall_id = $1;", [hallId.input], (err, result) => {
+const deleteUser = (req, res, next) => {
+    console.log("deleteUser");
+    const userId = req.params;
+    db.query("DELETE FROM users WHERE user_id = $1;", [userId.input], (err, result) => {
             if (err) {
             return next(err);
         }
@@ -57,8 +57,8 @@ const deleteHall = (req, res, next) => {
 
 module.exports = {
     getUsers,
-    getUser
-    //postHall,
-    //updateHall, 
-    //deleteHall
+    getUser,
+    postUser,
+    updateUser, 
+    deleteUser
 };
