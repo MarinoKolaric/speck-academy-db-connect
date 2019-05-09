@@ -1,6 +1,7 @@
 const db = require("../../db/connect");
 
 const getHalls = (req, res, next) => {
+    console.log("getHalls");
     db.query("SELECT * FROM halls", (err, result) => {
 //        db.query("SELECT NOW()", (err, result) => {
             if (err) {
@@ -11,6 +12,7 @@ const getHalls = (req, res, next) => {
 }
 
 const getHall = (req, res, next) => {
+    console.log("getHall");
     const hallId = req.params;
     db.query("SELECT * FROM halls WHERE hall_id = $1;", [hallId.input], (err, result) => {
             if (err) {
@@ -21,7 +23,9 @@ const getHall = (req, res, next) => {
 }
 
 const postHall = (req, res, next) => {
-    db.query("INSERT INTO halls (hall_id, name, address, capacity) VALUES ('49871009-5ccc-4ee8-a7f6-3473f9601353', 'dummy2', 'dummy3', 12345);", (err, result) => {
+    console.log("postHall");
+    const bodyData = req.body;
+    db.query("INSERT INTO halls (hall_id, name, address, capacity) VALUES ($1, $2, $3, $4);", [bodyData.hall_id, bodyData.name, bodyData.address, bodyData.capacity], (err, result) => {
             if (err) {
             return next(err);
         }
@@ -30,7 +34,10 @@ const postHall = (req, res, next) => {
 }
 
 const updateHall = (req, res, next) => {
-    db.query("UPDATE halls SET name = 'new hall name', address = 'new address', capacity = 33 WHERE hall_id = 'b2aa69a6-0d07-48b1-a7e8-5cb32a972bbc';", (err, result) => {
+    console.log("updateHall");
+    const hallId = req.params;
+    const bodyData = req.body;
+    db.query("UPDATE halls SET name = $1, address = $2, capacity = $3 WHERE hall_id = $4;", [bodyData.name, bodyData.address, bodyData.capacity, hallId.input], (err, result) => {
             if (err) {
             return next(err);
         }
@@ -39,11 +46,13 @@ const updateHall = (req, res, next) => {
 }
 
 const deleteHall = (req, res, next) => {
-    db.query("DELETE FROM halls WHERE hall_id = 'b2aa69a6-0d07-48b1-a7e8-5cb32a972bbc';", (err, result) => {
+    console.log("deleteHall");
+    const hallId = req.params;
+    db.query("DELETE FROM halls WHERE hall_id = $1;", [hallId.input], (err, result) => {
             if (err) {
             return next(err);
         }
-        res.send(result.rows);
+        res.send("empty");
     });
 }
 
@@ -51,5 +60,6 @@ module.exports = {
     getHalls,
     getHall,
     postHall,
-    updateHall
+    updateHall, 
+    deleteHall
 };

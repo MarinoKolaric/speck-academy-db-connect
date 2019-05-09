@@ -3,16 +3,19 @@ const hallsControler = require('./controller.js');
 const router = new express.Router();
 
 
-router.route('/')
+router.route('/getall')
     .get(hallsControler.getHalls);
 
-router.route('/:input')
+router.route('/get/:input')
     .get(hallsControler.getHall);
 
-router.route('/newhall')
+router.route('/posthall')
     .post(hallsControler.postHall);
 
-router.route('/updatehall')
+router.route('/updatehall/:input')
     .post(hallsControler.updateHall);    
+
+router.route('/deletehall/:input')
+    .delete(hallsControler.deleteHall);    
 
 module.exports = router;

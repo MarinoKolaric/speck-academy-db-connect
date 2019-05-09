@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {hallsHandler} = require('./route-handlers');
-const {hallHandler} = require('./route-handlers');
 
 const router = new express.Router();
 const app = express();
@@ -15,7 +14,6 @@ app.use(
   })
 )
 
-//console.log(hallsHandler);
 // TODO: Base routes
 router.use('/halls', hallsHandler);
 
