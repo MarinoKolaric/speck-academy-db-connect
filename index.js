@@ -18,8 +18,7 @@ app.use(
 console.log('halls handler', hallsHandler)
 
 // TODO: Base routes
-router.use('/halls', hallsHandler);
-router.use('/:hall_id', hallsHandler);
+router.use('/', hallsHandler);
 
 // Test route
 router.get('/', (req, res) => {
